@@ -1,3 +1,4 @@
+#The code of the data used to implement and calculate the workforce per age categorie.
 let
     Source = Excel.Workbook(File.Contents("C:\Users\hoksb\OneDrive\Bureaublad\HAN Bedrijfskunde\Minor Data Driven Decision Making\Individual portfolio\Data individual portfolio\Dataset Power BI.xlsx"), null, true),
     #"Available workforce per age cat_Sheet" = Source{[Item="Available workforce per age cat",Kind="Sheet"]}[Data],
@@ -7,3 +8,14 @@ let
     #"Renamed Columns" = Table.RenameColumns(#"Unpivoted Columns",{{"Attribute", "Age group"}, {"Column1", "Year"}})
 in
     #"Renamed Columns"
+
+
+#The code of the data used to implemented the data of the total population per category.
+
+let
+    Source = Excel.Workbook(File.Contents("C:\Users\hoksb\OneDrive\Bureaublad\HAN Bedrijfskunde\Minor Data Driven Decision Making\Individual portfolio\Data individual portfolio\Dataset Power BI.xlsx"), null, true),
+    #"Population per category_Sheet" = Source{[Item="Population per category",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(#"Population per category_Sheet", [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Column1", Int64.Type}, {"15 - 20 years", Int64.Type}, {"21 - 25 years", Int64.Type}, {"26 - 30 years", Int64.Type}, {"31 - 35 years", Int64.Type}, {"36 - 40 years", Int64.Type}, {"41 - 45 years", Int64.Type}, {"46 - 50 years", Int64.Type}, {"51 - 55 years", Int64.Type}, {"56 - 60 years", Int64.Type}, {"61 - 65 years", Int64.Type}, {"66 - 70 years", Int64.Type}, {"Total population", Int64.Type}})
+in
+    #"Changed Type"
