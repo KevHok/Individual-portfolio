@@ -1,0 +1,9 @@
+let
+    Source = Excel.Workbook(File.Contents("C:\Users\hoksb\OneDrive\Bureaublad\HAN Bedrijfskunde\Minor Data Driven Decision Making\Individual portfolio\Data individual portfolio\Dataset Power BI.xlsx"), null, true),
+    #"Available workforce per age cat_Sheet" = Source{[Item="Available workforce per age cat",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(#"Available workforce per age cat_Sheet", [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Column1", Int64.Type}, {"Percentage of the avaiable workforce", type number}, {"15 - 20 years", type number}, {"21 - 25 years", type number}, {"26 - 30 years", type number}, {"31 - 35 years", type number}, {"36 - 40 years", type number}, {"41 - 45 years", type number}, {"46 - 50 years", type number}, {"51 - 55 years", type number}, {"56 - 60 years", type number}, {"61 - 65 years", type number}, {"66 - 70 years", type number}}),
+    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Changed Type", {"Column1", "Percentage of the avaiable workforce"}, "Attribute", "Value"),
+    #"Renamed Columns" = Table.RenameColumns(#"Unpivoted Columns",{{"Attribute", "Age group"}, {"Column1", "Year"}})
+in
+    #"Renamed Columns"
