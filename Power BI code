@@ -1,4 +1,7 @@
 #The code of the data used to implement and calculate the workforce per age categorie.
+#The dataset used in this calculation is the Dataset Power BI, which is also added to this Github repository.
+#Within the Excel dataset the calculation population times percentage of the available workforce has been used to calculate the total amount of people able to work within a certain age group.
+
 let
     Source = Excel.Workbook(File.Contents("C:\Users\hoksb\OneDrive\Bureaublad\HAN Bedrijfskunde\Minor Data Driven Decision Making\Individual portfolio\Data individual portfolio\Dataset Power BI.xlsx"), null, true),
     #"Available workforce per age cat_Sheet" = Source{[Item="Available workforce per age cat",Kind="Sheet"]}[Data],
